@@ -47,6 +47,10 @@ digraph validation {
     "Ask clarifying questions" -> "Wait for API/EDR Manager response";
     "Implement using confirmed contracts" -> "New API needed?";
     "New API needed?" -> "Request registration from api-edr-manager" [label="yes"];
+    "New API needed?" -> "Task complete" [label="no"];
+    "Proceed without API check" -> "Task complete";
+    "Request registration from api-edr-manager" -> "Task complete";
+    "Task complete" [shape=doublecircle];
 }
 ```
 
@@ -115,7 +119,7 @@ When requirements need updating:
 3. Never delete previous versions
 4. Notify Team Lead of version change
 
-## Red Flags
+## Red Flags - STOP and Confirm
 
 **Never:**
 - Implement API calls without checking with API/EDR Manager
@@ -126,10 +130,10 @@ When requirements need updating:
 
 ## Integration
 
-**REQUIRED by:**
+**Called by:**
 - **superpowers:team-driven-development** — All code-writing workers must follow this skill
 - **superpowers:executing-plans** — API validation before implementation
 
-**Works with:**
+**Pairs with:**
 - **superpowers:audit-verification** — Audit Agent checks API consistency
 - **superpowers:verification-before-completion** — Final verification includes API check

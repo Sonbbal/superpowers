@@ -190,7 +190,7 @@ Remove:
 | After compression | Process deferred messages first, then resume task |
 | System auto-compressed | Treat as 160k threshold hit — do interim cleanup |
 
-## Red Flags
+## Red Flags - STOP and Compress
 
 **Never:**
 - Start a new task when tokens exceed 160k
@@ -202,10 +202,10 @@ Remove:
 
 ## Integration
 
-**REQUIRED by:**
+**Called by:**
 - **superpowers:team-driven-development** — All team agents follow this skill
 - All agents in any team-based workflow
 
-**Works with:**
+**Pairs with:**
 - **superpowers:audit-verification** — Audit state preserved through compression
 - **superpowers:api-edr-validation** — API contracts preserved through compression

@@ -33,7 +33,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:team-driven-development to implement this plan with an agent team.
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:team-driven-development for parallel agent team execution, or superpowers:executing-plans for sequential batch execution in a separate session.
 
 **Goal:** [One sentence describing what this builds]
 

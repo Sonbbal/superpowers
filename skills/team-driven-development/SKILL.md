@@ -9,14 +9,16 @@ Execute plan by creating an agent team with dedicated roles, parallel task execu
 
 **Core principle:** Team Lead orchestrates only, never writes code. Workers implement. Dedicated roles (API manager + audit agent) enforce quality gates. Parallel execution for speed.
 
+**Announce at start:** "I'm using the team-driven-development skill to execute this plan with an agent team."
+
 <HARD-GATE>
-The Team Lead (main Claude) MUST NOT write any code directly.
-The Team Lead's ONLY job is orchestration:
+You (Team Lead) MUST NOT write any code directly.
+Your ONLY job is orchestration:
 - Create and manage the team
 - Assign tasks to workers
 - Route messages between agents
 - Resolve blockers by coordinating agents
-- Make architectural decisions when asked
+- Make architectural decisions when asked by your human partner or workers
 
 "Let me just write this one small thing" is NEVER acceptable.
 "It's faster if I do it myself" is NEVER acceptable.
@@ -54,10 +56,10 @@ digraph when_to_use {
 
 | Role | Model | Responsibility | Writes Code? |
 |------|-------|----------------|:---:|
-| **Team Lead** | Opus | Orchestration ONLY — assigns tasks, routes messages, resolves blockers | **NO — NEVER** |
-| **API/EDR Manager** | Opus (mandatory) | Validates API contracts, EDR docs, variable consistency | NO |
-| **Audit Agent** | Opus (mandatory) | Verifies task completion against spec, blocks non-compliant work | NO |
-| **Worker(s)** | Opus (hard) / Sonnet (easy) | Implements tasks following TDD | **YES — only role that writes code** |
+| **Team Lead (You)** | Opus | Orchestration ONLY — assign tasks, route messages, resolve blockers | **NO — NEVER** |
+| **API/EDR Manager** | Opus (mandatory) | Validate API contracts, EDR docs, variable consistency | NO |
+| **Audit Agent** | Opus (mandatory) | Verify task completion against spec, block non-compliant work | NO |
+| **Worker(s)** | Opus (hard) / Sonnet (easy) | Implement tasks following TDD | **YES — only role that writes code** |
 
 <HARD-GATE>
 You MUST NOT skip API/EDR Manager or Audit Agent roles when creating the team.
@@ -71,54 +73,54 @@ Every team MUST include both roles regardless of project size or perceived simpl
 digraph process {
     rankdir=TB;
 
-    "Read plan, extract tasks, assess difficulty" [shape=box];
-    "Create team with TeamCreate" [shape=box style=filled fillcolor=lightyellow];
-    "Assign mandatory roles: API/EDR Manager + Audit Agent" [shape=box style=filled fillcolor=orange];
-    "API/EDR Manager checks docs/ for API and EDR documents" [shape=box];
+    "Extract tasks, assess difficulty" [shape=box];
+    "Create team (TeamCreate)" [shape=box];
+    "Spawn API/EDR Manager + Audit Agent" [shape=box style=filled fillcolor=orange];
+    "API/EDR Manager scans docs/" [shape=box];
     "API/EDR docs exist?" [shape=diamond];
-    "API/EDR Manager creates initial API registry" [shape=box];
-    "API/EDR Manager loads and indexes existing docs" [shape=box];
-    "Assign tasks to workers based on difficulty (model-assignment)" [shape=box];
+    "Create API registry" [shape=box];
+    "Index existing docs" [shape=box];
+    "Assign workers (model-assignment)" [shape=box];
 
     subgraph cluster_per_task {
         label="Per Task (parallel where independent)";
         "Worker receives task" [shape=box];
-        "Worker queries API/EDR Manager for relevant APIs" [shape=box style=filled fillcolor=lightblue];
-        "API/EDR Manager responds with contracts and variables" [shape=box style=filled fillcolor=lightblue];
-        "Worker implements with TDD" [shape=box];
-        "Worker sends completion to Audit Agent" [shape=box style=filled fillcolor=lightyellow];
-        "Audit Agent verifies task vs spec" [shape=diamond];
-        "Audit Agent requests fixes" [shape=box];
+        "Query API/EDR Manager" [shape=box style=filled fillcolor=lightblue];
+        "Get confirmed contracts" [shape=box style=filled fillcolor=lightblue];
+        "Implement with TDD" [shape=box];
+        "Send completion to Audit Agent" [shape=box];
+        "Audit passes?" [shape=diamond];
+        "Fix and resubmit" [shape=box];
         "Task approved" [shape=box style=filled fillcolor=lightgreen];
     }
 
     "All tasks complete?" [shape=diamond];
-    "API/EDR Manager does final consistency check" [shape=box];
-    "Final code review" [shape=box];
-    "Use superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
+    "Final consistency check" [shape=box];
+    "Dispatch worker for full test suite" [shape=box];
+    "finishing-a-development-branch" [shape=doublecircle];
 
-    "Read plan, extract tasks, assess difficulty" -> "Create team with TeamCreate";
-    "Create team with TeamCreate" -> "Assign mandatory roles: API/EDR Manager + Audit Agent";
-    "Assign mandatory roles: API/EDR Manager + Audit Agent" -> "API/EDR Manager checks docs/ for API and EDR documents";
-    "API/EDR Manager checks docs/ for API and EDR documents" -> "API/EDR docs exist?";
-    "API/EDR docs exist?" -> "API/EDR Manager loads and indexes existing docs" [label="yes"];
-    "API/EDR docs exist?" -> "API/EDR Manager creates initial API registry" [label="no"];
-    "API/EDR Manager loads and indexes existing docs" -> "Assign tasks to workers based on difficulty (model-assignment)";
-    "API/EDR Manager creates initial API registry" -> "Assign tasks to workers based on difficulty (model-assignment)";
-    "Assign tasks to workers based on difficulty (model-assignment)" -> "Worker receives task";
-    "Worker receives task" -> "Worker queries API/EDR Manager for relevant APIs";
-    "Worker queries API/EDR Manager for relevant APIs" -> "API/EDR Manager responds with contracts and variables";
-    "API/EDR Manager responds with contracts and variables" -> "Worker implements with TDD";
-    "Worker implements with TDD" -> "Worker sends completion to Audit Agent";
-    "Worker sends completion to Audit Agent" -> "Audit Agent verifies task vs spec";
-    "Audit Agent verifies task vs spec" -> "Audit Agent requests fixes" [label="fail"];
-    "Audit Agent requests fixes" -> "Worker implements with TDD" [label="re-implement"];
-    "Audit Agent verifies task vs spec" -> "Task approved" [label="pass"];
+    "Extract tasks, assess difficulty" -> "Create team (TeamCreate)";
+    "Create team (TeamCreate)" -> "Spawn API/EDR Manager + Audit Agent";
+    "Spawn API/EDR Manager + Audit Agent" -> "API/EDR Manager scans docs/";
+    "API/EDR Manager scans docs/" -> "API/EDR docs exist?";
+    "API/EDR docs exist?" -> "Index existing docs" [label="yes"];
+    "API/EDR docs exist?" -> "Create API registry" [label="no"];
+    "Index existing docs" -> "Assign workers (model-assignment)";
+    "Create API registry" -> "Assign workers (model-assignment)";
+    "Assign workers (model-assignment)" -> "Worker receives task";
+    "Worker receives task" -> "Query API/EDR Manager";
+    "Query API/EDR Manager" -> "Get confirmed contracts";
+    "Get confirmed contracts" -> "Implement with TDD";
+    "Implement with TDD" -> "Send completion to Audit Agent";
+    "Send completion to Audit Agent" -> "Audit passes?";
+    "Audit passes?" -> "Fix and resubmit" [label="no"];
+    "Fix and resubmit" -> "Implement with TDD";
+    "Audit passes?" -> "Task approved" [label="yes"];
     "Task approved" -> "All tasks complete?";
-    "All tasks complete?" -> "Worker receives task" [label="no - next task"];
-    "All tasks complete?" -> "API/EDR Manager does final consistency check" [label="yes"];
-    "API/EDR Manager does final consistency check" -> "Final code review";
-    "Final code review" -> "Use superpowers:finishing-a-development-branch";
+    "All tasks complete?" -> "Worker receives task" [label="no"];
+    "All tasks complete?" -> "Final consistency check" [label="yes"];
+    "Final consistency check" -> "Dispatch worker for full test suite";
+    "Dispatch worker for full test suite" -> "finishing-a-development-branch";
 }
 ```
 
@@ -214,13 +216,13 @@ EVERY worker MUST after completing a task:
 
 ### Step 8: Final Gates
 
-After all tasks:
-1. API/EDR Manager performs final cross-task consistency check
-2. Audit Agent performs final comprehensive verification
-3. Run full test suite
+After all tasks (use TaskList to confirm all tasks are marked complete):
+1. Send message to `api-edr-manager`: "All tasks complete. Perform final cross-task consistency check."
+2. Send message to `audit-agent`: "All tasks complete. Perform final comprehensive verification."
+3. Dispatch a worker to run the full test suite (you MUST NOT run tests yourself)
 4. Use superpowers:finishing-a-development-branch
 
-## Red Flags
+## Red Flags - STOP and Correct
 
 **Never:**
 - **Team Lead writes code directly** — spawn a worker instead, always
@@ -239,17 +241,18 @@ After all tasks:
 
 ## Integration
 
-**Required workflow skills:**
-- **superpowers:using-git-worktrees** — REQUIRED: Set up isolated workspace before starting
-- **superpowers:writing-plans** — Creates the plan this skill executes
-- **superpowers:api-edr-validation** — REQUIRED: API/EDR Manager follows this skill
-- **superpowers:audit-verification** — REQUIRED: Audit Agent follows this skill
-- **superpowers:model-assignment** — REQUIRED: Determines worker model assignment
-- **superpowers:context-window-management** — REQUIRED: All agents follow context rules
-- **superpowers:finishing-a-development-branch** — Complete development after all tasks
+**Called by:**
+- **writing-plans** (Execution Handoff) - REQUIRED when team-driven execution chosen
+- Your human partner requesting parallel team execution
 
-**Each worker should use:**
-- **superpowers:test-driven-development** — Workers follow TDD for each task
+**Pairs with:**
+- **using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
+- **api-edr-validation** - REQUIRED: Code-writing workers follow this skill
+- **audit-verification** - REQUIRED: All task completions go through audit
+- **model-assignment** - REQUIRED: Determines worker model assignment
+- **context-window-management** - REQUIRED: All agents follow context rules
+- **test-driven-development** - Workers follow TDD for each task
+- **finishing-a-development-branch** - Complete development after all tasks
 
 **Replaces:**
-- **superpowers:subagent-driven-development** — Team-driven is the preferred approach for parallel work
+- **subagent-driven-development** - DEPRECATED: Team-driven is the preferred approach

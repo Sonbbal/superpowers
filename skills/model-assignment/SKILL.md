@@ -11,6 +11,8 @@ Not all tasks require the same model capability. This skill defines mandatory ru
 
 **Core principle:** Hard tasks get Opus, easy tasks get Sonnet. API/EDR Manager and Audit Agent ALWAYS get Opus — no exceptions.
 
+**Announce at start:** "I'm using the model-assignment skill to determine the right model for each agent."
+
 ## Mandatory Assignments (Non-Negotiable)
 
 | Agent Role | Model | Override Allowed? |
@@ -104,7 +106,7 @@ digraph model_decision {
 
 **Default to Opus.** The cost difference is small compared to the cost of a subtle bug from under-powered reasoning. If you're spending more than 10 seconds deciding, just use Opus.
 
-## Red Flags
+## Red Flags - STOP and Reconsider
 
 **Never:**
 - Assign Sonnet to API/EDR Manager or Audit Agent
@@ -115,8 +117,8 @@ digraph model_decision {
 
 ## Integration
 
-**REQUIRED by:**
+**Called by:**
 - **superpowers:team-driven-development** — Model assignment before worker dispatch
 
-**Works with:**
+**Pairs with:**
 - **superpowers:context-window-management** — Model choice affects context efficiency

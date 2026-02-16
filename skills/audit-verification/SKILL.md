@@ -11,6 +11,8 @@ Every completed task MUST be verified by the Audit Agent before it can be marked
 
 **Core principle:** No task is complete without Audit Agent approval. Self-reporting is insufficient — independent verification is mandatory.
 
+**Announce at start:** "I'm using the audit-verification skill to verify task completion before marking it done."
+
 <HARD-GATE>
 You MUST NOT mark any task as "completed" in TaskUpdate without Audit Agent approval.
 "The task is obviously correct" is NEVER a valid reason to skip audit.
@@ -103,7 +105,7 @@ Workers MUST send this to the Audit Agent:
 | Critical security issue | Broadcast BLOCK to entire team |
 | Cross-task conflict | Notify Team Lead + affected workers |
 
-## Red Flags
+## Red Flags - STOP and Verify
 
 **Never:**
 - Skip audit because "it's obvious"
@@ -114,10 +116,10 @@ Workers MUST send this to the Audit Agent:
 
 ## Integration
 
-**REQUIRED by:**
+**Called by:**
 - **superpowers:team-driven-development** — All task completions go through audit
 - **superpowers:verification-before-completion** — Audit is part of final verification
 
-**Works with:**
+**Pairs with:**
 - **superpowers:api-edr-validation** — Audit checks API consistency
 - **superpowers:test-driven-development** — Audit verifies TDD was followed

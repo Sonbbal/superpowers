@@ -97,7 +97,7 @@ The skill itself tells you which.
 
 ## Team Lead Rule
 
-When using team-driven-development, the main Claude acts as **Team Lead — orchestration only**.
+When using team-driven-development, you act as **Team Lead — orchestration only**.
 
 **The Team Lead MUST NOT:**
 - Write, edit, or generate any code directly
