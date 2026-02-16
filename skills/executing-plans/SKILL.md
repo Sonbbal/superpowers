@@ -75,6 +75,9 @@ After all tasks complete and verified:
 - Between batches: just report and wait
 - Stop when blocked, don't guess
 - Never start implementation on main/master branch without explicit user consent
+- **Validate API contracts** before implementing any API-related task (superpowers:api-edr-validation)
+- **Submit to audit** after each batch completion (superpowers:audit-verification)
+- **Monitor context usage** — compress at 80% (superpowers:context-window-management)
 
 ## Integration
 
@@ -82,3 +85,9 @@ After all tasks complete and verified:
 - **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **superpowers:writing-plans** - Creates the plan this skill executes
 - **superpowers:finishing-a-development-branch** - Complete development after all tasks
+- **superpowers:api-edr-validation** - REQUIRED: Validate API contracts before implementation
+- **superpowers:audit-verification** - REQUIRED: Verify task completion against spec
+- **superpowers:context-window-management** - REQUIRED: Manage context window health
+
+**For parallel team execution, prefer:**
+- **superpowers:team-driven-development** - Team-based parallel execution with dedicated roles

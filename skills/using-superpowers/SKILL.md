@@ -77,16 +77,21 @@ These thoughts mean STOP—you're rationalizing:
 When multiple skills could apply, use this order:
 
 1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
-2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution
+2. **Team & validation skills second** (team-driven-development, api-edr-validation, model-assignment) - these set up execution infrastructure
+3. **Implementation skills third** (frontend-design, mcp-builder) - these guide execution
+4. **Quality gate skills always** (audit-verification, context-window-management) - these run continuously
 
-"Let's build X" → brainstorming first, then implementation skills.
+"Let's build X" → brainstorming first, then team setup with API/EDR manager and audit agent, then implementation skills.
 "Fix this bug" → debugging first, then domain-specific skills.
+"Execute this plan" → team-driven-development with mandatory API/EDR and audit gates.
 
 ## Skill Types
 
-**Rigid** (TDD, debugging): Follow exactly. Don't adapt away discipline.
+**Rigid** (TDD, debugging, audit-verification, api-edr-validation, context-window-management): Follow exactly. Don't adapt away discipline.
 
 **Flexible** (patterns): Adapt principles to context.
+
+**Mandatory team roles** (api-edr-manager, audit-agent): ALWAYS present in team-driven-development. Never optional.
 
 The skill itself tells you which.
 
