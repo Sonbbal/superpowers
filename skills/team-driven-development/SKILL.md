@@ -7,7 +7,21 @@ description: Use when composing an agent team for parallel work, executing plans
 
 Execute plan by creating an agent team with dedicated roles, parallel task execution, mandatory API/EDR validation, and audit verification after each task.
 
-**Core principle:** Agent team with dedicated roles (API manager + audit agent + workers) + parallel execution + mandatory gates = high quality, fast delivery
+**Core principle:** Team Lead orchestrates only, never writes code. Workers implement. Dedicated roles (API manager + audit agent) enforce quality gates. Parallel execution for speed.
+
+<HARD-GATE>
+The Team Lead (main Claude) MUST NOT write any code directly.
+The Team Lead's ONLY job is orchestration:
+- Create and manage the team
+- Assign tasks to workers
+- Route messages between agents
+- Resolve blockers by coordinating agents
+- Make architectural decisions when asked
+
+"Let me just write this one small thing" is NEVER acceptable.
+"It's faster if I do it myself" is NEVER acceptable.
+If no worker is available, spawn a new worker. Never code yourself.
+</HARD-GATE>
 
 ## When to Use
 
@@ -38,12 +52,12 @@ digraph when_to_use {
 
 ## Mandatory Team Roles
 
-| Role | Model | Responsibility |
-|------|-------|----------------|
-| **Team Lead** | Opus | Orchestrates tasks, manages team, resolves blockers |
-| **API/EDR Manager** | Opus (mandatory) | Validates API contracts, EDR docs, variable consistency |
-| **Audit Agent** | Opus (mandatory) | Verifies task completion against spec, blocks non-compliant work |
-| **Worker(s)** | Opus (hard) / Sonnet (easy) | Implements tasks following TDD |
+| Role | Model | Responsibility | Writes Code? |
+|------|-------|----------------|:---:|
+| **Team Lead** | Opus | Orchestration ONLY — assigns tasks, routes messages, resolves blockers | **NO — NEVER** |
+| **API/EDR Manager** | Opus (mandatory) | Validates API contracts, EDR docs, variable consistency | NO |
+| **Audit Agent** | Opus (mandatory) | Verifies task completion against spec, blocks non-compliant work | NO |
+| **Worker(s)** | Opus (hard) / Sonnet (easy) | Implements tasks following TDD | **YES — only role that writes code** |
 
 <HARD-GATE>
 You MUST NOT skip API/EDR Manager or Audit Agent roles when creating the team.
@@ -209,6 +223,7 @@ After all tasks:
 ## Red Flags
 
 **Never:**
+- **Team Lead writes code directly** — spawn a worker instead, always
 - Create team without API/EDR Manager and Audit Agent
 - Let workers skip the API validation query
 - Mark tasks complete without audit-agent approval
