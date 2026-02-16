@@ -1,23 +1,26 @@
 ---
 name: api-edr-validation
-description: Use when any agent needs to verify API contracts, EDR documents, or variable consistency before implementing — mandatory for all workers in team-driven-development
+description: Use when a code-writing agent needs to verify API contracts, EDR documents, or variable naming before implementing — prevents agents from inventing API shapes and variable names
 ---
 
 # API/EDR Validation
 
 ## Overview
 
-Every agent working on implementation MUST validate API contracts and variable consistency with the API/EDR Manager before writing code. This skill defines the mandatory validation process.
+Code-writing agents frequently invent API endpoints, variable names, and request/response shapes without checking documentation. This causes cross-task inconsistencies and broken integrations. This skill forces code-writing workers to confirm all API contracts and variable declarations with the API/EDR Manager before writing any code.
 
-**Core principle:** No agent writes code that touches an API or shared variable without confirming the contract with the API/EDR Manager first.
+**Core principle:** No code-writing agent declares API endpoints, EDR variables, or shared data structures without API/EDR Manager confirmation. The API/EDR Manager is the single source of truth.
+
+**Announce at start:** "I'm using the api-edr-validation skill to confirm API contracts before coding."
 
 ## When to Use
 
-- Before implementing any task that involves API calls
-- Before creating new endpoints or events
-- Before using shared variables or data models
-- When modifying existing API contracts
+- Before implementing any task that involves API calls or endpoint creation
+- Before creating or using EDR variables and event schemas
+- Before declaring shared variables, types, or data models
+- When modifying existing API contracts or variable names
 - When uncertain about request/response shapes
+- **Any time you are about to write code that references an API or declares a variable used across boundaries**
 
 ## The Validation Process
 
@@ -124,7 +127,7 @@ When requirements need updating:
 ## Integration
 
 **REQUIRED by:**
-- **superpowers:team-driven-development** — All workers must follow this skill
+- **superpowers:team-driven-development** — All code-writing workers must follow this skill
 - **superpowers:executing-plans** — API validation before implementation
 
 **Works with:**

@@ -1,6 +1,6 @@
 ---
 name: team-driven-development
-description: Use when executing implementation plans with 2+ independent tasks requiring parallel work — uses TeamCreate and agent teams instead of subagents for coordinated parallel execution with mandatory API validation and audit gates
+description: Use when composing an agent team for parallel work, executing plans with 2+ independent tasks, or when user requests parallel execution with agent teams
 ---
 
 # Team-Driven Development
@@ -173,16 +173,19 @@ Task (Worker):
   team_name: "<project-name>"
 ```
 
-### Step 6: Worker API Validation Loop
+### Step 6: Code-Writing Worker API Validation Loop
 
 ```
-EVERY worker MUST:
+EVERY code-writing worker MUST:
 1. SendMessage to api-edr-manager: "I'm working on Task N. What APIs/variables apply?"
 2. WAIT for api-edr-manager's response
-3. Implement using confirmed API contracts
-4. If new API needed: request api-edr-manager to register it
-5. NEVER assume API shapes — always confirm with api-edr-manager
+3. Implement using ONLY confirmed API contracts and variable names
+4. If new API needed: request api-edr-manager to register it BEFORE using it
+5. NEVER assume API shapes or invent variable names — always confirm with api-edr-manager
+6. NEVER declare new API endpoints or EDR variables without api-edr-manager approval
 ```
+
+**Why this matters:** Agents frequently invent API endpoints, variable names, and request/response shapes on their own. This causes cross-task inconsistencies, broken integrations, and wasted debugging time. The API/EDR Manager is the single source of truth for all API contracts and variable declarations.
 
 ### Step 7: Audit Verification Loop
 
@@ -215,9 +218,9 @@ After all tasks:
 - Skip the final consistency check
 - Proceed when audit-agent reports failures
 
-**If worker hits 80% context:**
+**If worker exceeds 160k tokens:**
 - **REQUIRED:** Use superpowers:context-window-management
-- Complete current unit of work, compress, then continue
+- Complete current unit of work, do interim cleanup, compress context, then continue
 
 ## Integration
 

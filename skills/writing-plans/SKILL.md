@@ -33,7 +33,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:team-driven-development to implement this plan with an agent team.
 
 **Goal:** [One sentence describing what this builds]
 
@@ -98,13 +98,11 @@ git commit -m "feat: add specific feature"
 
 After saving the plan, offer execution choice:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Three execution options:**
+**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
 
 **1. Team-Driven (recommended)** - Agent team with parallel execution, dedicated API/EDR Manager and Audit Agent, model-based optimization
 
-**2. Subagent-Driven (this session)** - Fresh subagent per task, review between tasks, fast iteration
-
-**3. Parallel Session (separate)** - Open new session with executing-plans, batch execution with checkpoints
+**2. Parallel Session (separate)** - Open new session with executing-plans, batch execution with checkpoints
 
 **Which approach?"**
 
@@ -112,14 +110,9 @@ After saving the plan, offer execution choice:
 - **REQUIRED SUB-SKILL:** Use superpowers:team-driven-development
 - Creates team with mandatory API/EDR Manager + Audit Agent
 - Workers assigned Opus or Sonnet based on task difficulty (superpowers:model-assignment)
-- All workers validate APIs before coding (superpowers:api-edr-validation)
+- Code-writing workers validate APIs before coding (superpowers:api-edr-validation)
 - All completions verified by Audit Agent (superpowers:audit-verification)
-- Context compression enforced at 80% (superpowers:context-window-management)
-
-**If Subagent-Driven chosen:**
-- **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development
-- Stay in this session
-- Fresh subagent per task + code review
+- Context compression enforced at 160k tokens (superpowers:context-window-management)
 
 **If Parallel Session chosen:**
 - Guide them to open new session in worktree

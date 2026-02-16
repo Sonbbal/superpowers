@@ -77,7 +77,7 @@ After all tasks complete and verified:
 - Never start implementation on main/master branch without explicit user consent
 - **Validate API contracts** before implementing any API-related task (superpowers:api-edr-validation)
 - **Submit to audit** after each batch completion (superpowers:audit-verification)
-- **Monitor context usage** — compress at 80% (superpowers:context-window-management)
+- **Monitor context usage** — compress at 160k tokens (superpowers:context-window-management)
 
 ## Integration
 

@@ -1,9 +1,15 @@
 ---
 name: subagent-driven-development
-description: Use when executing implementation plans with independent tasks in the current session
+description: "DEPRECATED — Use superpowers:team-driven-development instead. This skill is retained for backward compatibility only."
 ---
 
 # Subagent-Driven Development
+
+> **⛔ DEPRECATED:** This skill has been replaced by **superpowers:team-driven-development**.
+> Team-driven development uses agent teams (TeamCreate + SendMessage) for parallel execution
+> with dedicated API/EDR Manager and Audit Agent roles.
+>
+> **If you are reading this, STOP and invoke superpowers:team-driven-development instead.**
 
 Execute plan by dispatching fresh subagent per task, with two-stage review after each: spec compliance review first, then code quality review.
 
