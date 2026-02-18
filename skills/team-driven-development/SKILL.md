@@ -172,6 +172,42 @@ Use **superpowers:model-assignment** to determine model for each worker:
 | **High** | New architecture, complex logic, security-critical, multi-system integration | Opus |
 | **Low** | Simple CRUD, config changes, boilerplate, straightforward tests | Sonnet |
 
+### Step 4.5: Worker 페르소나 주입
+
+Worker를 spawn하기 전에, 해당 태스크를 분석하여 페르소나를 생성하라:
+
+**1. 페르소나 파일 선택:**
+- 태스크의 파일 유형과 기술 도메인을 분석
+- `personas/index.md`를 읽어서 적합한 페르소나 파일 확인
+- 해당 `personas/*.md` 파일을 읽기
+
+**2. 필요한 섹션 추출:**
+- Identity + Domain Expertise + Constraints + Anti-Drift는 항상 포함
+- Technical Knowledge는 태스크와 관련된 부분만 선택적 포함
+
+**3. 페르소나 템플릿 조합:**
+
+```
+You are a {ROLE_TITLE}.
+
+DOMAIN EXPERTISE:
+{personas 파일의 Domain Expertise에서 추출}
+
+GOAL:
+{태스크 목표를 Worker 관점에서 재구성}
+
+CONSTRAINTS:
+{personas 파일의 Constraints + 기본 API/EDR 쿼리 의무}
+
+ANTI-DRIFT REMINDER:
+{personas 파일의 Anti-Drift 섹션}
+```
+
+**4. Worker 프롬프트 구성:**
+- 페르소나를 프롬프트 맨 앞에 배치
+- `---` 구분선 후 기존 태스크 상세 내용 배치
+- API/EDR 쿼리 의무와 Audit 제출 의무는 그대로 유지
+
 ### Step 5: Dispatch Workers (Parallel)
 
 For each independent task group:
@@ -182,7 +218,22 @@ Task (Worker):
   subagent_type: "general-purpose"
   model: "<opus or sonnet per difficulty>"
   prompt: |
-    Task: <full task text>
+    You are a {ROLE_TITLE from persona file}.
+
+    DOMAIN EXPERTISE:
+    {Extracted from personas/*.md}
+
+    GOAL:
+    {Task goal rewritten from worker perspective}
+
+    CONSTRAINTS:
+    {Extracted from personas/*.md + standard constraints}
+
+    ANTI-DRIFT REMINDER:
+    {Extracted from personas/*.md}
+
+    ---
+    Task: <full task text from plan>
     MANDATORY: Before writing ANY code, send a message to api-edr-manager
     asking for the API contracts relevant to your task.
     After completion, send your work summary to audit-agent for verification.
