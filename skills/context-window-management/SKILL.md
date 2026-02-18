@@ -177,6 +177,12 @@ Remove:
 ### Next Actions
 1. <immediate next step>
 2. <following step>
+
+### Team Lead State (if applicable)
+- Active File Lock Table:
+  - <worker-name>: [<file1>, <file2>]
+- DEFER_STREAK: <N>
+- After compression: re-verify lock table via TaskGet on all in_progress tasks
 ```
 
 ## Quick Reference

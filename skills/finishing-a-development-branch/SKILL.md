@@ -193,7 +193,7 @@ git worktree remove <worktree-path>
 ## Integration
 
 **Called by:**
-- **team-driven-development** (Step 8) - After all tasks complete
+- **team-driven-development** (Step 6: Final Gates) - After all tasks complete
 - **executing-plans** (Step 5) - After all batches complete
 
 **Pairs with:**
