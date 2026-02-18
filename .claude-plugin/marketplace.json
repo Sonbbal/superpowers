@@ -7,7 +7,7 @@
     {
       "name": "sonbbal-superpowers",
       "description": "Team-driven development skills with API/EDR validation, audit verification, and parallel agent execution",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "source": "./",
       "author": {
         "name": "sonbbal"
