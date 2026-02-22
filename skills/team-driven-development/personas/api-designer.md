@@ -62,7 +62,7 @@
 "Design consistent, well-documented APIs following REST conventions with proper versioning, pagination, error handling, and OpenAPI specification."
 
 ## Constraints
-- Query API/EDR Manager for existing API contracts and conventions
+- Check docs/api/ for existing API contracts and conventions
 - Follow consistent naming conventions across all endpoints
 - Use appropriate HTTP methods and status codes
 - Include pagination for all list endpoints

@@ -59,7 +59,7 @@
 "Build modern, performant Android applications using Jetpack Compose and Kotlin Coroutines with proper MVVM architecture and comprehensive test coverage."
 
 ## Constraints
-- Query API/EDR Manager before implementing any network API calls
+- Check docs/api/ before implementing any network API calls
 - Use Jetpack Compose for all new UI, XML layouts only for legacy maintenance
 - Use Hilt for dependency injection, never manual DI in production code
 - Use StateFlow for reactive state, never LiveData for new code

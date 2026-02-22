@@ -60,7 +60,7 @@
 "Build efficient, idiomatic Go services with proper error handling, context propagation, and comprehensive table-driven tests."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API endpoints
+- Check docs/api/ before implementing any API endpoints
 - Handle every error return — never use blank identifier for errors
 - Use context.Context for all I/O operations
 - Follow Go naming conventions (exported = PascalCase, unexported = camelCase)

@@ -58,7 +58,7 @@
 "Build performant, cross-platform React Native applications using Expo and New Architecture with proper navigation, state management, and comprehensive tests."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API integration
+- Check docs/api/ before implementing any API integration
 - Use TypeScript strict mode for all code
 - Use Expo Router or React Navigation for navigation, never manual navigation
 - Optimize list rendering with FlashList for large datasets

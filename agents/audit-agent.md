@@ -35,7 +35,7 @@ When a worker reports task completion, you MUST verify ALL of the following:
 
 ### 3. API Consistency
 
-- [ ] All API usages match the API/EDR Manager's registry
+- [ ] All API usages match the contracts documented in docs/api/
 - [ ] Variable names are consistent with project standards
 - [ ] Request/response shapes match documented contracts
 
@@ -78,7 +78,7 @@ SendMessage to worker:
   "AUDIT APPROVED — Task N verified.
    ✅ Spec compliance: All 5 requirements implemented
    ✅ Tests: 8 tests passing
-   ✅ API consistency: Matches registry
+   ✅ API consistency: Matches docs/api/ contracts
    ✅ Git: Clean commit history
    You may mark this task complete."
 
@@ -119,7 +119,21 @@ After ALL tasks are complete, perform a final audit:
 1. **Cross-task consistency** — Do all tasks work together?
 2. **Full test suite** — Run and verify all tests pass
 3. **Integration points** — Verify tasks that depend on each other
-4. **API final check** — Coordinate with API/EDR Manager for consistency
+4. **API documentation verification:**
+   1. Check if `docs/api/` has changed (`git diff` against the branch base commit)
+   2. If changes detected → verify using the **API Documentation Verification Checklist** below
+   3. If no changes → quick format consistency check only
+
+   **API Documentation Verification Checklist** (when `docs/api/` has changes):
+   - **Format compliance** — All `docs/api/` files follow `api-edr-validation` standard format (header, meta, Changelog, Endpoints, Events, Shared Types)
+   - **Duplicate detection** — Same endpoint/event/type must not exist in multiple files
+   - **Undocumented API detection** — New endpoints implemented by workers must have corresponding `docs/api/` entries
+   - **Shared Types consistency** — Common types should be consolidated in `shared-types.md`
+   - **On issues found:** Report all findings to Team Lead and request worker remediation
+     - Format violations, missing meta, stale Changelog → report with specific file and line
+     - Structural changes (endpoint deletion, domain reclassification, type consolidation) → Team Lead decision required
+     - For comprehensive optimization, refer to `/optimize-api-docs` command
+
 5. **Completeness** — Every planned task has been audited and approved
 
 ## Audit Report Format
@@ -142,7 +156,11 @@ After ALL tasks are complete, perform a final audit:
 - [✅/❌] Error handling present
 
 ### API Consistency
-- [✅/❌] API contracts match registry
+- [✅/❌] API contracts match docs/api/ documentation
+- [✅/❌] All docs/api/ files follow standard format
+- [✅/❌] No duplicate endpoints across domain files
+- [✅/❌] New endpoints documented in docs/api/
+- [✅/❌] API docs verified (if changes detected)
 
 ### Git Hygiene
 - [✅/❌] Clean commits

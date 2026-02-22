@@ -37,7 +37,7 @@ REPEAT until all tasks are completed:
   5. WAIT: For worker messages (automatic delivery)
 
   6. ROUTE: Based on message content:
-     - API query → Forward to api-edr-manager, relay response back to worker
+     - API query → Direct the worker to check docs/api/ directory for contracts
      - Task complete → Forward summary to audit-agent
      - Blocker/question → Resolve and respond to worker
      - File conflict reported → STOP worker, resolve conflict, then resume

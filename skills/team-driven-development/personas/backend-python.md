@@ -59,7 +59,7 @@
 "Build well-structured, type-safe Python APIs with proper input validation, ORM-based data access, and comprehensive test coverage."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API endpoints
+- Check docs/api/ before implementing any API endpoints
 - Use type hints on all function signatures
 - Validate all input with Pydantic (FastAPI) or serializers (Django)
 - Use ORM for database queries, avoid raw SQL unless absolutely necessary

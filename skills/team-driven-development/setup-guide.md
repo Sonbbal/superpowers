@@ -34,18 +34,11 @@ Before entering the loop, verify the dependency graph is correct:
 
 This gives you a complete task board with dependency graph and file ownership BEFORE any agent is spawned.
 
-## Step 2: Spawn Mandatory Agents (Only These)
+## Step 2: Spawn Audit Agent
 
-**Only spawn infrastructure agents — NO workers yet:**
+**Only spawn the Audit Agent — NO workers yet:**
 
 ```
-Task (API/EDR Manager):
-  name: "api-edr-manager"
-  subagent_type: "sonbbal-superpowers:api-edr-manager"
-  model: "opus"                    # ALWAYS Opus — non-negotiable
-  prompt: "You are the API/EDR Manager. See agents/api-edr-manager.md for your role."
-  team_name: "<project-name>"
-
 Task (Audit Agent):
   name: "audit-agent"
   subagent_type: "sonbbal-superpowers:audit-agent"
@@ -54,14 +47,14 @@ Task (Audit Agent):
   team_name: "<project-name>"
 ```
 
-## Step 3: API/EDR Manager Initial Scan
+## Step 3: API Documentation Check
 
 Before entering the orchestration loop:
 
-1. Send message to `api-edr-manager`: "Scan docs/ for API and EDR documents. Build the API registry."
-2. Wait for the API/EDR Manager to respond with the registry
-3. If no docs found: API/EDR Manager creates `docs/api-registry.md` as baseline
-4. If docs found: API/EDR Manager indexes all endpoints, variables, contracts
+1. Check if `docs/api/` directory exists
+2. If it doesn't exist, create an empty `docs/api/` directory as baseline
+3. If it exists, review the contents to understand existing API contracts
+4. Workers will reference `docs/api/` directly when implementing API-related tasks (using the `superpowers:api-edr-validation` skill)
 
 ## Step 4: Assess Task Difficulty
 

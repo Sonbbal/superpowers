@@ -59,7 +59,7 @@
 "Build cross-platform Flutter applications with clean architecture, proper state management, and comprehensive widget and unit tests."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API integration
+- Check docs/api/ before implementing any API integration
 - Use proper state management (Riverpod/Bloc), never StatefulWidget for business logic
 - Use const constructors for static widgets
 - Follow existing project structure and naming conventions

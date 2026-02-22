@@ -58,7 +58,7 @@
 "Build robust, convention-following Rails 8 features using Hotwire for modern interactivity and Solid infrastructure components for production reliability."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API endpoints or routes
+- Check docs/api/ before implementing any API endpoints or routes
 - Follow Rails conventions (RESTful routes, resourceful controllers)
 - Always write database migrations, never modify schema.rb directly
 - Include model validations AND database-level constraints

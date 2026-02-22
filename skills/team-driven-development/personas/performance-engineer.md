@@ -61,7 +61,7 @@
 "Identify and resolve performance bottlenecks with measurable improvements backed by benchmark data, without sacrificing code correctness."
 
 ## Constraints
-- Query API/EDR Manager for existing caching and performance contracts
+- Check docs/api/ for existing caching and performance contracts
 - Always measure before and after optimization (provide benchmark data)
 - Never sacrifice correctness for speed
 - Document performance trade-offs in code comments

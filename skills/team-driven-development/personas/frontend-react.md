@@ -56,7 +56,7 @@
 "Build performant, accessible React components leveraging Server Components and React 19 features, following Next.js App Router conventions."
 
 ## Constraints
-- Query API/EDR Manager before any data-fetching or API integration logic
+- Check docs/api/ before any data-fetching or API integration logic
 - Use Server Components by default, mark "use client" only when interactivity is required
 - Follow existing component directory structure and naming conventions
 - Ensure all interactive elements meet WCAG 2.1 AA accessibility standards

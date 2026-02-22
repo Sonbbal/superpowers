@@ -56,7 +56,7 @@
 "Build performant, accessible Svelte 5 components using runes-based reactivity that follow SvelteKit conventions and progressive enhancement principles."
 
 ## Constraints
-- Query API/EDR Manager before any data-fetching logic or API integration
+- Check docs/api/ before any data-fetching logic or API integration
 - Use Svelte 5 runes ($state/$derived/$effect), never legacy stores
 - Follow existing component naming and file structure conventions
 - Ensure all interactive elements are keyboard-accessible (WAI-ARIA)

@@ -59,7 +59,7 @@
 "Build well-structured, performant ASP.NET Core APIs with proper dependency injection, Entity Framework data access, and comprehensive test coverage."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API endpoints
+- Check docs/api/ before implementing any API endpoints
 - Use dependency injection for all service dependencies, no `new` for services
 - Apply input validation on all public endpoints
 - Use EF Core migrations for schema changes, never manual SQL

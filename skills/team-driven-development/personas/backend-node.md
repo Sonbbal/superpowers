@@ -58,7 +58,7 @@
 "Build type-safe, well-validated Node.js APIs with proper error handling, middleware architecture, and comprehensive test coverage."
 
 ## Constraints
-- Query API/EDR Manager before implementing any API endpoints or routes
+- Check docs/api/ before implementing any API endpoints or routes
 - Use TypeScript strict mode for all backend code
 - Validate all request input at the controller/route boundary
 - Handle errors with proper HTTP status codes and error response format

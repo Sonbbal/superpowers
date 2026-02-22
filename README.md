@@ -55,13 +55,12 @@
 | 역할 | 모델 | 책임 | 코드 작성 |
 |------|------|------|:---------:|
 | **Team Lead** | Opus | 오케스트레이션만 담당 — 태스크 할당, 메시지 라우팅, 블로커 해결 | **불가** |
-| **API/EDR Manager** | Opus (필수) | API 계약 검증, EDR 문서 관리, 변수 일관성 확인 | 불가 |
 | **Audit Agent** | Opus (필수) | 태스크 완료 검증, 스펙 대비 검사, 비준수 작업 차단 | 불가 |
 | **Worker(s)** | Opus/Sonnet | TDD 기반 태스크 구현 | **유일하게 가능** |
 
 ### API/EDR 검증 (api-edr-validation)
 
-코드를 작성하는 에이전트가 API 엔드포인트, 변수명, 요청/응답 스키마를 **임의로 생성하는 것을 방지**합니다. 모든 API 계약은 API/EDR Manager를 통해 확인 후 사용해야 합니다.
+코드를 작성하는 에이전트가 API 엔드포인트, 변수명, 요청/응답 스키마를 **임의로 생성하는 것을 방지**합니다. 모든 API 계약은 `docs/api/` 디렉토리의 문서를 직접 참조하여 확인 후 사용해야 합니다.
 
 ### 감사 검증 (audit-verification)
 
@@ -72,7 +71,7 @@
 태스크 난이도에 따라 적절한 모델을 자동 할당합니다:
 - **Opus**: 복잡한 로직, 보안 관련, 아키텍처 설계, 다중 시스템 통합
 - **Sonnet**: 단순 CRUD, 설정 변경, 보일러플레이트, 패턴 따르기
-- **API/EDR Manager, Audit Agent**: 항상 Opus (변경 불가)
+- **Audit Agent**: 항상 Opus (변경 불가)
 
 ### 컨텍스트 윈도우 관리 (context-window-management)
 
@@ -81,6 +80,14 @@
 2. 중간 정리 (커밋, 상태 저장)
 3. 컨텍스트 압축
 4. 압축 완료 후 재개
+
+### 유틸리티 커맨드
+
+| 커맨드 | 설명 |
+|--------|------|
+| `/optimize-claude-md` | CLAUDE.md 분석 및 최적화 — 200줄 이하로 핵심만 남기고 상세 내용은 `docs/`로 분리 |
+| `/optimize-api-docs` | `docs/api/` 분석 및 최적화 — 초기 Bootstrap 또는 포맷 검증, 중복/고아/미문서화 API 감지 |
+| `/setup-hooks` | 프로젝트 생태계 감지 후 Claude Code hooks 자동 구성 |
 
 ---
 
@@ -135,8 +142,7 @@
 
 | 에이전트 | 파일 | 역할 |
 |----------|------|------|
-| API/EDR Manager | agents/api-edr-manager.md | API 계약 및 EDR 문서의 단일 진실 공급원 |
-| Audit Agent | agents/audit-agent.md | 모든 태스크 완료의 독립적 검증자 |
+| Audit Agent | agents/audit-agent.md | 모든 태스크 완료의 독립적 검증자 + API 문서 검증 게이트 |
 
 ---
 

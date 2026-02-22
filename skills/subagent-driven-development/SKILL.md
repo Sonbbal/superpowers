@@ -7,7 +7,7 @@ description: "DEPRECATED — Use superpowers:team-driven-development instead. Th
 
 > **⛔ DEPRECATED:** This skill has been replaced by **superpowers:team-driven-development**.
 > Team-driven development uses agent teams (TeamCreate + SendMessage) for parallel execution
-> with dedicated API/EDR Manager and Audit Agent roles.
+> with a dedicated Audit Agent role and API validation via docs/api/.
 >
 > **If you are reading this, STOP and invoke superpowers:team-driven-development instead.**
 

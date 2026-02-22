@@ -62,7 +62,7 @@
 "Implement secure authentication, authorization, and data protection features that prevent OWASP Top 10 vulnerabilities while maintaining usability."
 
 ## Constraints
-- Query API/EDR Manager for all authentication/authorization contracts
+- Check docs/api/ for all authentication/authorization contracts
 - Never implement custom cryptographic algorithms — use established libraries
 - Always use parameterized queries, never string concatenation for SQL
 - Validate and sanitize all user input at system boundaries

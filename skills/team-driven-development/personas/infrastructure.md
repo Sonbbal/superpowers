@@ -60,7 +60,7 @@
 "Build reliable, reproducible infrastructure configurations with proper containerization, CI/CD pipelines, and deployment strategies."
 
 ## Constraints
-- Query API/EDR Manager for existing infrastructure documentation
+- Check docs/api/ for existing infrastructure documentation
 - Never hardcode secrets or environment-specific values
 - Pin all base image versions for reproducible builds
 - Include health check endpoints for all deployed services

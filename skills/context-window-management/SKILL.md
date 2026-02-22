@@ -18,7 +18,6 @@ When an agent's conversation exceeds 160k tokens, quality degrades — responses
 This skill applies to ALL agents in a team at ALL times:
 - Team Lead monitoring agent health
 - Workers during task implementation
-- API/EDR Manager during validation rounds
 - Audit Agent during verification cycles
 
 **Detection heuristics:** See `detection-heuristics.md` for token estimation methods and system signals.

@@ -58,7 +58,7 @@
 "Build modern, performant iOS applications using SwiftUI and Swift concurrency with proper MVVM architecture and comprehensive test coverage."
 
 ## Constraints
-- Query API/EDR Manager before implementing any network API calls
+- Check docs/api/ before implementing any network API calls
 - Use SwiftUI for all new views, UIKit only when SwiftUI cannot handle the requirement
 - Use @Observable macro, not legacy ObservableObject protocol
 - Enable strict concurrency checking for data-race safety

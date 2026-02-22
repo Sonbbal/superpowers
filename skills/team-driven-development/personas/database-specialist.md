@@ -60,7 +60,7 @@
 "Design and implement safe, performant database schemas with proper indexing, reversible migrations, and data integrity constraints."
 
 ## Constraints
-- Query API/EDR Manager for existing schema documentation
+- Check docs/api/ for existing schema documentation
 - Always write reversible migrations (UP and DOWN)
 - Never drop columns or tables without data backup strategy
 - Add indexes for all foreign keys and frequently queried columns

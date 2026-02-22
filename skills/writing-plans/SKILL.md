@@ -100,7 +100,7 @@ After saving the plan, offer execution choice:
 
 **"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
 
-**1. Team-Driven (recommended)** - Agent team with parallel execution, dedicated API/EDR Manager and Audit Agent, model-based optimization
+**1. Team-Driven (recommended)** - Agent team with parallel execution, dedicated Audit Agent, API validation via docs/api/, model-based optimization
 
 **2. Parallel Session (separate)** - Open new session with executing-plans, batch execution with checkpoints
 
@@ -108,7 +108,7 @@ After saving the plan, offer execution choice:
 
 **If Team-Driven chosen:**
 - **REQUIRED SUB-SKILL:** Use superpowers:team-driven-development
-- Creates team with mandatory API/EDR Manager + Audit Agent
+- Creates team with mandatory Audit Agent
 - Workers assigned Opus or Sonnet based on task difficulty (superpowers:model-assignment)
 - Code-writing workers validate APIs before coding (superpowers:api-edr-validation)
 - All completions verified by Audit Agent (superpowers:audit-verification)

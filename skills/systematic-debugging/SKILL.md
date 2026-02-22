@@ -212,6 +212,26 @@ You MUST complete each phase before proceeding to the next.
 
    This is NOT a failed hypothesis - this is a wrong architecture.
 
+### Phase 5: Team Debugging Mode
+
+**단일 에이전트로 해결이 어려운 경우, 팀 디버깅으로 전환합니다.**
+
+**트리거 조건** (하나 이상 충족 시):
+- 경쟁 가설이 3개 이상 존재하여 순차 조사가 비효율적
+- 영향 범위가 넓어 여러 시스템/모듈에 걸쳐 조사가 필요
+- 3회 이상 수정 시도가 실패 (Phase 4 Step 5에서 아키텍처 문제는 아닌 것으로 판단된 경우)
+
+**전환 방법:**
+1. `superpowers:team-driven-development`를 사용하여 디버깅 팀을 구성합니다
+2. **Competing Hypotheses 패턴**으로 전환 — 가설당 1명의 Investigator Worker를 스폰하여 병렬 조사
+3. 상세한 절차는 이 디렉토리의 `competing-hypotheses.md`를 따릅니다
+
+**핵심:** 가설을 직렬로 하나씩 검증하는 대신, 여러 Worker가 동시에 각각 다른 가설을 조사하고, 교차 검증을 통해 근본 원인을 빠르게 특정합니다.
+
+**IMPORTANT — Investigator Workers are READ-ONLY:**
+Investigator는 코드를 **읽고 분석**만 합니다. 절대 파일을 수정하지 않습니다.
+수정은 Phase 4 합성 이후 별도의 Fix Worker가 담당합니다.
+
 ## Red Flags - STOP and Follow Process
 
 If you catch yourself thinking:
@@ -229,7 +249,7 @@ If you catch yourself thinking:
 
 **ALL of these mean: STOP. Return to Phase 1.**
 
-**If 3+ fixes failed:** Question the architecture (see Phase 4.5)
+**If 3+ fixes failed:** Question the architecture (see Phase 4, Step 5)
 
 ## your human partner's Signals You're Doing It Wrong
 
@@ -263,6 +283,7 @@ If you catch yourself thinking:
 | **2. Pattern** | Find working examples, compare | Identify differences |
 | **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |
 | **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |
+| **5. Team Debugging** | Form competing hypotheses, parallel investigation, cross-validate | Root cause identified via synthesis |
 
 ## When Process Reveals "No Root Cause"
 
@@ -282,6 +303,7 @@ These techniques are part of systematic debugging and available in this director
 - **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger
 - **`defense-in-depth.md`** - Add validation at multiple layers after finding root cause
 - **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling
+- **`competing-hypotheses.md`** - Parallel hypothesis investigation with team debugging (Phase 5)
 
 **Related skills:**
 - **superpowers:test-driven-development** - For creating failing test case (Phase 4, Step 1)

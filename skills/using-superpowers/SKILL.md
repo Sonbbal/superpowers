@@ -81,9 +81,9 @@ When multiple skills could apply, use this order:
 3. **Implementation skills third** (frontend-design, mcp-builder) - these guide execution
 4. **Quality gate skills always** (audit-verification, context-window-management) - these run continuously
 
-"Let's build X" → brainstorming first, then team setup with API/EDR manager and audit agent, then implementation skills.
+"Let's build X" → brainstorming first, then team setup with audit agent, then implementation skills.
 "Fix this bug" → debugging first, then domain-specific skills.
-"Execute this plan" → team-driven-development with mandatory API/EDR and audit gates.
+"Execute this plan" → team-driven-development with mandatory audit gates.
 
 ## Skill Types
 
@@ -91,7 +91,7 @@ When multiple skills could apply, use this order:
 
 **Flexible** (patterns): Adapt principles to context.
 
-**Mandatory team roles** (api-edr-manager, audit-agent): ALWAYS present in team-driven-development. Never optional.
+**Mandatory team roles** (audit-agent): ALWAYS present in team-driven-development. Never optional.
 
 The skill itself tells you which.
 

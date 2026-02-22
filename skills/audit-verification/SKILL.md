@@ -79,7 +79,7 @@ Workers MUST send this to the Audit Agent:
 - Command: <test command used>
 
 ### API Contracts Used
-- <list of endpoints/events used, confirmed with API/EDR Manager>
+- <list of endpoints/events used, documented in docs/api/>
 
 ### Commits
 - <commit hashes and messages>
@@ -91,7 +91,7 @@ Workers MUST send this to the Audit Agent:
 2. **Read the git diff** for the worker's commits
 3. **Compare spec vs implementation** line by line
 4. **Verify tests exist and pass** by running them
-5. **Check API consistency** with the API/EDR Manager's registry
+5. **Check API consistency** against docs/api/ documentation
 6. **Verify no scope creep** — nothing extra beyond spec
 7. **Issue verdict:** APPROVED or REJECTED
 

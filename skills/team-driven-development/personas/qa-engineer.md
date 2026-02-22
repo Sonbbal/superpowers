@@ -61,7 +61,7 @@
 "Design and implement comprehensive test suites that validate behavior at appropriate levels with maintainable, independent, and fast tests."
 
 ## Constraints
-- Query API/EDR Manager for API contracts to validate in tests
+- Check docs/api/ for API contracts to validate in tests
 - Follow existing test file structure and naming patterns
 - Mock external services at system boundaries, never call real APIs in tests
 - Each test must be independent and runnable in isolation

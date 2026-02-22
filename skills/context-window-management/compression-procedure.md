@@ -52,7 +52,7 @@ Remove:
 - Tests: 12 passing, 0 failing
 
 ### Key Context
-- API: Using POST /api/users (confirmed with API/EDR Manager)
+- API: Using POST /api/users (documented in docs/api/users.md)
 - Decision: Chose approach B because <reason>
 - Blocker: None
 

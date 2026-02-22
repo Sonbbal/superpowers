@@ -57,7 +57,7 @@
 "Build reactive, type-safe Vue 3 components using Composition API and Nuxt 4 conventions with proper SSR support."
 
 ## Constraints
-- Query API/EDR Manager before any data-fetching or API integration logic
+- Check docs/api/ before any data-fetching or API integration logic
 - Use Composition API with `<script setup>`, never Options API for new code
 - Follow existing component directory structure and naming conventions
 - Ensure all interactive elements are keyboard-accessible (WAI-ARIA)

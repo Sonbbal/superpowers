@@ -1,6 +1,6 @@
 ---
 name: model-assignment
-description: Use when assigning models to agents in team-driven-development — determines Opus or Sonnet based on task difficulty, with mandatory Opus for API/EDR Manager and Audit Agent
+description: Use when assigning models to agents in team-driven-development — determines Opus or Sonnet based on task difficulty, with mandatory Opus for Audit Agent
 ---
 
 # Model Assignment
@@ -9,7 +9,7 @@ description: Use when assigning models to agents in team-driven-development — 
 
 Not all tasks require the same model capability. This skill defines mandatory rules for which model each agent uses, optimizing cost without sacrificing quality on critical paths.
 
-**Core principle:** Hard tasks get Opus, easy tasks get Sonnet. API/EDR Manager and Audit Agent ALWAYS get Opus — no exceptions.
+**Core principle:** Hard tasks get Opus, easy tasks get Sonnet. Audit Agent ALWAYS gets Opus — no exceptions.
 
 **Announce at start:** "I'm using the model-assignment skill to determine the right model for each agent."
 
@@ -17,15 +17,14 @@ Not all tasks require the same model capability. This skill defines mandatory ru
 
 | Agent Role | Model | Override Allowed? |
 |-----------|-------|-------------------|
-| **API/EDR Manager** | Opus | **NO — always Opus** |
 | **Audit Agent** | Opus | **NO — always Opus** |
 | **Team Lead** | Opus | **NO — always Opus** |
 
 <HARD-GATE>
-API/EDR Manager and Audit Agent MUST run on Opus.
+Audit Agent MUST run on Opus.
 "Sonnet is good enough for validation" is NEVER true.
-These agents catch subtle issues that require Opus-level reasoning.
-Downgrading them defeats the purpose of having dedicated validators.
+The Audit Agent catches subtle issues that require Opus-level reasoning.
+Downgrading it defeats the purpose of having a dedicated validator.
 </HARD-GATE>
 
 ## Worker Model Assignment
@@ -109,7 +108,7 @@ digraph model_decision {
 ## Red Flags - STOP and Reconsider
 
 **Never:**
-- Assign Sonnet to API/EDR Manager or Audit Agent
+- Assign Sonnet to Audit Agent
 - Assign Sonnet to security-critical tasks
 - Downgrade from Opus mid-task to save cost
 - Override mandatory Opus assignments for any reason
