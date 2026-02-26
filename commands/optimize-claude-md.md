@@ -91,6 +91,10 @@ CLAUDE.md를 다음 권장 구조로 재정렬합니다:
 ## Overview
 <!-- 프로젝트 설명 1-2문장 -->
 
+## Workflow Protocol
+<!-- 코드 변경 전 계획 제시 및 승인 규칙 -->
+Always present a modification plan and get explicit user approval BEFORE implementing any code changes.
+
 ## Tech Stack
 <!-- 기술 스택 bullet list -->
 
