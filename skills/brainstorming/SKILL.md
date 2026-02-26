@@ -11,6 +11,14 @@ Help turn ideas into fully formed designs and specs through natural collaborativ
 
 Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.
 
+## Roadmap Context
+
+프로젝트 로드맵(`docs/plans/*-roadmap.md`)이 존재하면:
+- **Phase 범위 내에서만** brainstorming을 진행한다
+- 세션 시작 시 "Phase N의 brainstorming입니다. 로드맵: `docs/plans/...-roadmap.md`" 맥락을 안내한다
+- 해당 Phase의 목표·범위·선행 조건을 참조하여 범위 초과를 방지한다
+- 로드맵이 없으면 기존과 동일하게 진행 (project-scoping 없이 단독 brainstorming)
+
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.
 </HARD-GATE>
