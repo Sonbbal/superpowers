@@ -49,7 +49,12 @@ REPEAT until all tasks are completed:
        c. Go to step 1 (completed task may unblock others + free file locks)
      - If audit-agent REJECTS:
        a. Forward rejection feedback to worker
-       b. Go to step 5 (wait for worker's fix)
+       b. Report to user (brief):
+          "audit-agent가 Task N을 reject했습니다.
+          유형: <reject 유형>
+          사유: <한 줄 요약>
+          워커에게 수정 지시를 전달했습니다."
+       c. Go to step 5 (wait for worker's fix)
 
   8. DYNAMIC SCALING:
      - If a blocked task becomes unblocked (dependency completed) → check file conflicts → spawn if clear
