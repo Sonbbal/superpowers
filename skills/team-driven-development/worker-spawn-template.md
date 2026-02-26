@@ -33,23 +33,67 @@ Task (Worker):
     Task: <full task text from TaskGet>
     Target files: <list from metadata.target_files>
 
+    GOAL:
+      <metadata.goal에서 추출>
+
+    SUCCESS CRITERIA:
+      1. <metadata.success_criteria[0]>
+      2. <metadata.success_criteria[1]>
+      3. <metadata.success_criteria[2]>
+
+    VERIFICATION METHOD:
+      <metadata.verification_method에서 추출>
+
     MANDATORY WORKFLOW:
-    1. FIRST: Read docs/api/ for API contracts relevant to your task
-       - If relevant docs exist, use them as the source of truth
-       - If no docs exist for your domain, create docs/api/[domain].md using the
-         superpowers:api-edr-validation skill's standard format
-    2. Follow TDD: write failing test FIRST, then implement minimal code to pass
+    0. UNDERSTAND: Goal과 Success Criteria를 읽고, 자신의 말로 정리하여
+       Team Lead에게 SendMessage로 보고한다.
+       "Task N 이해 완료: [자신의 말로 정리한 목표]"
+       Team Lead가 이해가 틀렸다고 판단하면 교정한다.
+
+    1. PLAN: 구현 계획을 3-5단계로 수립한다 (코드 작성 전).
+       각 단계가 어떤 success criteria를 충족시키는지 매핑한다.
+
+    2. CHECK docs/api/: API 계약 확인
+       - relevant docs exist → use as source of truth
+       - no docs for your domain → create docs/api/[domain].md
+       (REQUIRED SUB-SKILL: superpowers:api-edr-validation)
+
+    3. RED: 실패하는 테스트 작성 → 실행하여 실패 확인
        (REQUIRED SUB-SKILL: superpowers:test-driven-development)
-    3. Implement using ONLY documented API contracts and variable names
-    4. If you create a new API endpoint: create or update docs/api/[domain].md
-    5. When DONE: SendMessage to audit-agent with Task Completion Report:
+
+    4. GREEN: 테스트 통과하는 최소 코드 작성 → 실행하여 통과 확인
+
+    5. REFACTOR: 필요시 정리 (테스트 그린 유지)
+
+    6. Repeat 3-5 for each success criteria / feature
+
+    7. SELF-CHECK: 모든 Success Criteria를 하나씩 대조 확인한다.
+       ```
+       SELF-CHECK RESULT:
+       Success Criteria:
+       - [✅/❌] 기준 1: <확인 방법과 결과>
+       - [✅/❌] 기준 2: <확인 방법과 결과>
+       - [✅/❌] 기준 3: <확인 방법과 결과>
+       Verification: <verification_method 실행 결과>
+       TDD Compliance:
+       - [✅/❌] 모든 기능에 대해 테스트를 먼저 작성했는가
+       - [✅/❌] 각 테스트가 실패하는 것을 확인한 후 구현했는가
+       - [✅/❌] success criteria마다 대응하는 테스트가 있는가
+       Tests: N개 통과 / N개 전체
+       ```
+       ❌가 하나라도 있으면 → Step 3으로 돌아가서 해결 후 재체크.
+
+    8. REPORT: audit-agent에게 Task Completion Report 제출.
+       - Goal: <목표>
+       - Self-Check: <위의 SELF-CHECK RESULT>
        - What Was Done (bullet list)
        - Files Changed (paths + description)
        - Tests (count, all passing yes/no, command used)
        - API Contracts (documented in docs/api/)
        - Commits (hashes and messages)
-    6. If audit-agent rejects: fix and resubmit
-    7. NEVER mark task complete yourself — Team Lead handles that after audit approval
+
+    9. If audit-agent rejects: fix and resubmit (Step 3부터)
+    10. NEVER mark task complete yourself — Team Lead handles that after audit approval
 
     FILE SCOPE RESTRICTION:
     - You may ONLY modify files listed in your target files
