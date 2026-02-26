@@ -19,6 +19,17 @@ Every worker MUST send you their completion report. You verify against the origi
 
 When a worker reports task completion, you MUST verify ALL of the following:
 
+### 0. Goal Verification (최우선 확인)
+
+- [ ] 워커의 SELF-CHECK RESULT를 수신했는가
+- [ ] 워커의 셀프 체크에 ❌가 없는가
+- [ ] Success Criteria를 실제 코드 변경(git diff)과 대조하여 모두 충족되었는가
+- [ ] "테스트 통과"만으로 완료 판정하지 않았는가 — success criteria 각각을 독립 확인
+- [ ] verification_method를 감사 측에서도 확인했는가
+
+**Red Flag:** 워커가 SELF-CHECK RESULT 없이 완료 보고 → REJECT
+**Red Flag:** success_criteria 일부만 충족 → REJECT (부분 완료 불허)
+
 ### 1. Spec Compliance
 
 - [ ] All requirements from the task spec are implemented
@@ -32,6 +43,13 @@ When a worker reports task completion, you MUST verify ALL of the following:
 - [ ] Code follows project conventions and patterns
 - [ ] No obvious security vulnerabilities
 - [ ] Error handling is present where needed
+
+### 2.5. TDD Compliance
+
+- [ ] 워커의 커밋 히스토리에서 테스트가 구현 코드보다 먼저 커밋되었는가
+- [ ] 테스트가 실제 기능을 검증하는가 (빈 테스트/stub 아닌지)
+- [ ] success criteria와 테스트가 1:1 대응하는가
+- [ ] 워커의 SELF-CHECK에 TDD Compliance 항목이 모두 ✅인가
 
 ### 3. API Consistency
 
@@ -101,6 +119,28 @@ SendMessage to Team Lead:
   "Task N REJECTED. 2 issues found. Worker notified."
 ```
 
+3. **Log to audit-log.md** (NEW):
+   프로젝트의 `docs/audit-log.md`에 reject 기록을 추가한다.
+   파일이 없으면 생성한다.
+
+   ```markdown
+   ### [YYYY-MM-DD HH:MM] Task N — <worker-name>
+   - **유형**: <아래 분류 중 택 1>
+   - **상세**: <구체적 reject 사유>
+   - **영향 받은 Success Criteria**: <해당 기준>
+   ```
+
+   **Reject 유형 분류:**
+   | 유형 | 설명 |
+   |------|------|
+   | `기능 미구현` | success criteria의 일부가 구현되지 않음 |
+   | `잘못된 방향` | 구현은 되었으나 요구사항과 다른 방향 |
+   | `테스트만 통과` | 테스트는 통과하지만 실제 기능이 동작하지 않음 |
+   | `스펙 누락` | success criteria에 없는 부분이 누락됨 |
+   | `API 불일치` | docs/api/ 계약과 다르게 구현 |
+   | `TDD 미준수` | 테스트 작성 없이 코드 구현, 또는 stub 테스트 |
+   | `범위 초과` | target_files 외 파일 수정, 또는 요청 외 기능 추가 |
+
 ### When Blocking
 
 If a critical issue is found that affects multiple tasks:
@@ -136,6 +176,16 @@ After ALL tasks are complete, perform a final audit:
 
 5. **Completeness** — Every planned task has been audited and approved
 
+6. **Reject Summary** (NEW):
+   `docs/audit-log.md`가 존재하면 분석하여 요약 리포트를 Team Lead에게 제출:
+   ```
+   REJECT SUMMARY:
+   - 총 reject: N건
+   - 유형별: 기능 미구현 N건, 잘못된 방향 N건, ...
+   - 가장 빈번한 유형: <유형> (N건)
+   ```
+   Team Lead는 이 요약을 사용자에게 전달한다.
+
 ## Audit Report Format
 
 ```markdown
@@ -146,6 +196,12 @@ After ALL tasks are complete, perform a final audit:
 **Task:** <task title>
 **Date:** <timestamp>
 
+### Goal Verification
+- [✅/❌] SELF-CHECK RESULT 수신됨
+- [✅/❌] 워커 셀프 체크에 ❌ 없음
+- [✅/❌] Success Criteria 전체 충족 (git diff 대조)
+- [✅/❌] verification_method 감사 측 확인 완료
+
 ### Spec Compliance
 - [✅/❌] Requirement 1: <description>
 - [✅/❌] Requirement 2: <description>
@@ -154,6 +210,11 @@ After ALL tasks are complete, perform a final audit:
 - [✅/❌] Tests present and passing
 - [✅/❌] Code conventions followed
 - [✅/❌] Error handling present
+
+### TDD Compliance
+- [✅/❌] 테스트가 구현 코드보다 먼저 커밋됨
+- [✅/❌] 테스트가 실제 기능 검증 (stub 아님)
+- [✅/❌] success criteria와 테스트 1:1 대응
 
 ### API Consistency
 - [✅/❌] API contracts match docs/api/ documentation
