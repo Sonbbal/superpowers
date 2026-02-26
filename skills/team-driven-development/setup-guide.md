@@ -16,11 +16,31 @@ For each task in plan:
     subject: "<task title>"
     description: "<full task requirements including target files>"
     activeForm: "<present continuous form>"
-    metadata: { "target_files": ["src/auth.ts", "src/auth.test.ts"] }
+    metadata: {
+      "target_files": ["src/auth.ts", "src/auth.test.ts"],
+      "model": "opus",
+      "goal": "<이 태스크가 완료되면 무엇이 달성되는가 — 한 문장>",
+      "success_criteria": [
+        "<검증 가능한 성공 기준 1>",
+        "<검증 가능한 성공 기준 2>",
+        "<검증 가능한 성공 기준 3>"
+      ],
+      "verification_method": "<구체적 검증 방법: 테스트 명, curl 명령, UI 확인 등>"
+    }
 
 Then set dependencies:
   TaskUpdate: { taskId: "2", addBlockedBy: ["1"] }  # if task 2 depends on task 1
 ```
+
+**CRITICAL — goal/success_criteria metadata:**
+Every task MUST declare goal, success_criteria, and verification_method.
+Workers use these for self-check, and Audit Agent verifies against them.
+
+**success_criteria 작성 원칙:**
+- 모호한 기준 금지: "잘 동작함" ✗ → "POST /api/login 시 200 + JWT 반환" ✓
+- 검증 가능해야 함: 테스트, curl, UI 조작 등으로 확인할 수 있어야 한다
+- 에러 케이스 포함: 정상 경로 + 비정상 경로 모두 기술
+- 3-7개 범위: 너무 적으면 누락 위험, 너무 많으면 태스크 분할 필요
 
 **CRITICAL — target_files metadata:**
 Every task MUST declare which files it will create or modify in `metadata.target_files`.
