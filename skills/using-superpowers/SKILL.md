@@ -76,12 +76,14 @@ These thoughts mean STOP—you're rationalizing:
 
 When multiple skills could apply, use this order:
 
-1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
-2. **Team & validation skills second** (team-driven-development, api-edr-validation, model-assignment) - these set up execution infrastructure
-3. **Implementation skills third** (frontend-design, mcp-builder) - these guide execution
-4. **Quality gate skills always** (audit-verification, context-window-management) - these run continuously
+1. **Scoping skills first** (project-scoping) - for large projects, define roadmap before details
+2. **Process skills second** (brainstorming, debugging) - these determine HOW to approach the task
+3. **Team & validation skills third** (team-driven-development, api-edr-validation, model-assignment) - these set up execution infrastructure
+4. **Implementation skills fourth** (frontend-design, mcp-builder) - these guide execution
+5. **Quality gate skills always** (audit-verification, context-window-management) - these run continuously
 
-"Let's build X" → brainstorming first, then team setup with audit agent, then implementation skills.
+"Let's build X" (large project) → project-scoping first, then brainstorming per Phase, then team setup.
+"Let's build X" (small feature) → brainstorming first, then team setup with audit agent.
 "Fix this bug" → debugging first, then domain-specific skills.
 "Execute this plan" → team-driven-development with mandatory audit gates.
 
@@ -113,3 +115,29 @@ When using team-driven-development, you act as **Team Lead — orchestration onl
 ## User Instructions
 
 Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.
+
+## Direct Conversation Rule
+
+사용자와 직접 대화하는 세션에서 (team-driven-development의 워커가 아닌 경우):
+
+<HARD-GATE>
+코드 변경(Edit, Write, NotebookEdit)이 필요한 요청을 받으면:
+1. 먼저 분석 결과와 변경 계획을 제시한다
+2. 사용자의 명시적 승인("진행해", "go ahead", "approved", "해줘" 등)을 기다린다
+3. 승인 후에만 Edit/Write/NotebookEdit를 실행한다
+
+"간단한 수정"도 예외 없이 이 순서를 따른다.
+"사용자가 수정을 요청했으니 바로 하면 된다" → STOP. 계획 제시가 먼저다.
+</HARD-GATE>
+
+**예외 (이 규칙이 적용되지 않는 경우):**
+- team-driven-development 내 워커 에이전트 (오케스트레이터가 관리)
+- 사용자가 "바로 수정해줘", "즉시 적용해" 등 명시적 즉시 실행 요청
+- 오타 수정 등 사용자가 구체적 변경 내용을 직접 지정한 경우
+
+| Thought | Reality |
+|---------|---------|
+| "사용자가 수정 요청했으니 바로 하자" | 요청 ≠ 승인. 계획 제시가 먼저. |
+| "이건 한 줄 수정이라 계획이 필요 없다" | 한 줄도 계획 제시 → 승인 → 실행. |
+| "물어보면 답과 함께 수정하는 게 빠르다" | 사용자는 답만 원했을 수 있다. |
+| "이전에 비슷한 수정을 승인했으니" | 이전 승인 ≠ 현재 승인. 매번 확인. |
