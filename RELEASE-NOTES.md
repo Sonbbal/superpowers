@@ -1,5 +1,41 @@
 # Superpowers Release Notes
 
+## v1.3.0 (2026-02-27) — Experience-Driven Improvements
+
+실전 110세션(2,251 메시지, 310시간) 사용 경험에서 도출된 마찰 패턴을 해결하는 업데이트.
+
+### New Skills
+- **project-scoping**: brainstorming 전 프로젝트 로드맵(Phase/목표/범위) 설정 스킬
+- **/project-scoping** command: 명시적 호출 지원
+
+### Enhanced Worker Workflow
+- **Goal Injection**: 워커 스폰 시 goal, success_criteria, verification_method 주입
+- **Self-Check Loop**: 워커가 작업 완료 전 성공 기준 하나하나 셀프 체크 후 감사에 제출
+- **10-Step Mandatory Workflow**: UNDERSTAND → PLAN → CHECK → RED → GREEN → REFACTOR → SELF-CHECK → REPORT
+
+### Enhanced Audit Agent
+- **Goal Verification**: success criteria 기반 의미적 검증 (구조적 체크를 넘어서)
+- **TDD Compliance**: 테스트 선행 작성 여부, stub 테스트 감지, success criteria-테스트 대응 확인
+- **Reject Logging**: reject 시 유형 분류 + docs/audit-log.md 누적 기록 + 사용자 안내
+- **Reject Summary**: 프로젝트 종료 시 reject 통계 리포트
+
+### Direct Conversation Rule
+- using-superpowers에 HARD-GATE 추가: 직접 대화 시 코드 변경 전 계획 제시 → 승인 → 실행 강제
+- team-driven-development 워커는 제외 (오케스트레이터가 관리)
+
+### Other Improvements
+- brainstorming: 로드맵 존재 시 Phase 범위 내 brainstorming 강제
+- using-superpowers: Skill Priority에 project-scoping 추가 (brainstorming 전 단계)
+- optimize-claude-md: 권장 CLAUDE.md 구조에 Workflow Protocol 섹션 추가
+- setup-guide: TaskCreate 메타데이터에 goal/success_criteria/verification_method 필수화
+- orchestration-loop: reject 시 사용자에게 유형+사유 리포트
+
+### Design Documents
+- `docs/plans/2026-02-26-v1.3.0-experience-driven-improvements-design.md`
+- `docs/plans/2026-02-26-v1.3.0-experience-driven-improvements-implementation.md`
+
+---
+
 ## v4.3.0 (2026-02-12)
 
 This fix should dramatically improve superpowers skills compliance and should reduce the chances of Claude entering its native plan mode unintentionally.
