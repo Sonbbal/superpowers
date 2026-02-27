@@ -118,26 +118,26 @@ Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.
 
 ## Direct Conversation Rule
 
-사용자와 직접 대화하는 세션에서 (team-driven-development의 워커가 아닌 경우):
+In direct conversation sessions with the user (not as a worker in team-driven-development):
 
 <HARD-GATE>
-코드 변경(Edit, Write, NotebookEdit)이 필요한 요청을 받으면:
-1. 먼저 분석 결과와 변경 계획을 제시한다
-2. 사용자의 명시적 승인("진행해", "go ahead", "approved", "해줘" 등)을 기다린다
-3. 승인 후에만 Edit/Write/NotebookEdit를 실행한다
+When you receive a request that requires code changes (Edit, Write, NotebookEdit):
+1. First, present your analysis and modification plan
+2. Wait for explicit user approval ("go ahead", "approved", "proceed", "do it", etc.)
+3. Only execute Edit/Write/NotebookEdit after approval
 
-"간단한 수정"도 예외 없이 이 순서를 따른다.
-"사용자가 수정을 요청했으니 바로 하면 된다" → STOP. 계획 제시가 먼저다.
+Even "simple fixes" follow this sequence without exception.
+"The user requested a fix, so I should just do it" → STOP. Present the plan first.
 </HARD-GATE>
 
-**예외 (이 규칙이 적용되지 않는 경우):**
-- team-driven-development 내 워커 에이전트 (오케스트레이터가 관리)
-- 사용자가 "바로 수정해줘", "즉시 적용해" 등 명시적 즉시 실행 요청
-- 오타 수정 등 사용자가 구체적 변경 내용을 직접 지정한 경우
+**Exceptions (cases where this rule does not apply):**
+- Worker agents inside team-driven-development (managed by the orchestrator)
+- The user explicitly requests immediate execution (e.g., "just fix it now", "apply it immediately")
+- The user specifies the exact change directly (e.g., typo corrections with explicit content)
 
 | Thought | Reality |
 |---------|---------|
-| "사용자가 수정 요청했으니 바로 하자" | 요청 ≠ 승인. 계획 제시가 먼저. |
-| "이건 한 줄 수정이라 계획이 필요 없다" | 한 줄도 계획 제시 → 승인 → 실행. |
-| "물어보면 답과 함께 수정하는 게 빠르다" | 사용자는 답만 원했을 수 있다. |
-| "이전에 비슷한 수정을 승인했으니" | 이전 승인 ≠ 현재 승인. 매번 확인. |
+| "The user requested a fix, so I should just do it" | Request ≠ approval. Present the plan first. |
+| "This is a one-line fix, no plan needed" | Even one line: present plan → get approval → execute. |
+| "It's faster to fix it along with the answer" | The user may have only wanted the answer. |
+| "They approved a similar fix before" | Previous approval ≠ current approval. Confirm every time. |

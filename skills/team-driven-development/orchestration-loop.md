@@ -32,7 +32,7 @@ REPEAT until all tasks are completed:
   4. SPAWN: For each ready task that passed conflict + dependency checks (up to 12 concurrent):
      - Spawn ONE worker per task (see worker-spawn-template.md)
      - Set task owner to worker name
-     - TaskUpdate: { taskId: N, status: "in_progress", owner: "worker-N" }
+     - TaskUpdate: { taskId: N, status: "in_progress", owner: "<worker-name>" }
 
   5. WAIT: For worker messages (automatic delivery)
 
@@ -50,10 +50,10 @@ REPEAT until all tasks are completed:
      - If audit-agent REJECTS:
        a. Forward rejection feedback to worker
        b. Report to user (brief):
-          "audit-agent가 Task N을 reject했습니다.
-          유형: <reject 유형>
-          사유: <한 줄 요약>
-          워커에게 수정 지시를 전달했습니다."
+          "audit-agent rejected Task N.
+          Type: <reject type>
+          Reason: <one-line summary>
+          Fix instructions forwarded to worker."
        c. Go to step 5 (wait for worker's fix)
 
   8. DYNAMIC SCALING:

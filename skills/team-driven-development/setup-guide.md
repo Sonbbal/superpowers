@@ -19,13 +19,13 @@ For each task in plan:
     metadata: {
       "target_files": ["src/auth.ts", "src/auth.test.ts"],
       "model": "opus",
-      "goal": "<이 태스크가 완료되면 무엇이 달성되는가 — 한 문장>",
+      "goal": "<What is achieved when this task is complete — one sentence>",
       "success_criteria": [
-        "<검증 가능한 성공 기준 1>",
-        "<검증 가능한 성공 기준 2>",
-        "<검증 가능한 성공 기준 3>"
+        "<Verifiable success criterion 1>",
+        "<Verifiable success criterion 2>",
+        "<Verifiable success criterion 3>"
       ],
-      "verification_method": "<구체적 검증 방법: 테스트 명, curl 명령, UI 확인 등>"
+      "verification_method": "<Specific verification method: test name, curl command, UI check, etc.>"
     }
 
 Then set dependencies:
@@ -36,11 +36,11 @@ Then set dependencies:
 Every task MUST declare goal, success_criteria, and verification_method.
 Workers use these for self-check, and Audit Agent verifies against them.
 
-**success_criteria 작성 원칙:**
-- 모호한 기준 금지: "잘 동작함" ✗ → "POST /api/login 시 200 + JWT 반환" ✓
-- 검증 가능해야 함: 테스트, curl, UI 조작 등으로 확인할 수 있어야 한다
-- 에러 케이스 포함: 정상 경로 + 비정상 경로 모두 기술
-- 3-7개 범위: 너무 적으면 누락 위험, 너무 많으면 태스크 분할 필요
+**success_criteria writing principles:**
+- No vague criteria: "works well" ✗ → "POST /api/login returns 200 + JWT" ✓
+- Must be verifiable: should be confirmable via tests, curl, UI interaction, etc.
+- Include error cases: describe both happy path and unhappy path
+- 3-7 range: too few risks omission, too many means the task needs splitting
 
 **CRITICAL — target_files metadata:**
 Every task MUST declare which files it will create or modify in `metadata.target_files`.
