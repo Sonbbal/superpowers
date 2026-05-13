@@ -1,7 +1,7 @@
 {
   "name": "sonbbal-superpowers-codex",
   "version": "2.0.0",
-  "description": "Codex-focused Superpowers plugin package with Codex-native planning, TDD, review, validation, and team workflows.",
+  "description": "Codex-focused Superpowers plugin package with Codex-native planning, TDD, review, validation, team workflows, and project AGENTS.md bootstrap guidance.",
   "author": {
     "name": "sonbbal",
     "url": "https://github.com/Sonbbal"
@@ -19,8 +19,8 @@
   "skills": "./skills",
   "interface": {
     "displayName": "Sonbbal Superpowers for Codex",
-    "shortDescription": "Codex-native Superpowers package for planning, TDD, review, validation, and team workflows.",
-    "longDescription": "A Codex-focused package of Superpowers workflows, separated from the root Claude Code plugin files so both harnesses can live in the same repository.",
+    "shortDescription": "Codex-native Superpowers package with project AGENTS.md bootstrap guidance.",
+    "longDescription": "A Codex-focused package of Superpowers workflows, separated from the Claude Code package and paired with a project bootstrap script that adds managed AGENTS.md guidance.",
     "developerName": "sonbbal",
     "category": "Productivity",
     "capabilities": [
@@ -29,9 +29,9 @@
     ],
     "websiteURL": "https://github.com/Sonbbal/superpowers",
     "defaultPrompt": [
-      "Use Sonbbal Superpowers to design this feature before implementation.",
-      "Use the Codex Superpowers workflow to execute this implementation plan.",
-      "Review this branch using the Superpowers verification workflow."
+      "Install Sonbbal Superpowers in this project.",
+      "Use Superpowers to plan this feature.",
+      "Review this branch with Superpowers."
     ],
     "brandColor": "#2563EB"
   }

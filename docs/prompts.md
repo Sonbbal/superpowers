@@ -31,12 +31,13 @@ Use these prompts inside the target agent when you want it to install or update 
 요구사항:
 1. 현재 작업 디렉터리를 사용자의 프로젝트 루트로 판단한다.
 2. https://github.com/Sonbbal/superpowers.git 저장소를 ~/.codex/superpowers 에 clone하거나, 이미 있으면 git pull로 업데이트한다.
-3. Codex plugin metadata를 지원하는 환경이면 저장소의 .agents/plugins/marketplace.json 이 ./codex 패키지를 가리키는지 확인한다.
-4. native skill discovery를 쓰는 환경이면 ~/.agents/skills/sonbbal-superpowers-codex 가 ~/.codex/superpowers/codex/skills 를 가리키도록 symlink를 만든다.
-5. Windows에서는 symlink 대신 junction을 사용한다:
-   cmd /c mklink /J "%USERPROFILE%\.agents\skills\sonbbal-superpowers-codex" "%USERPROFILE%\.codex\superpowers\codex\skills"
-6. codex/skills 아래에 using-superpowers, brainstorming, writing-plans, executing-plans, team-driven-development 스킬이 있는지 검증한다.
-7. 설치 또는 업데이트 후 Codex를 재시작하라고 안내한다.
+3. Codex plugin metadata를 지원하는 환경이면 ~/.codex/superpowers/.agents/plugins/marketplace.json 에서 sonbbal-superpowers-codex 플러그인을 설치하거나 업데이트한다. 지원 여부가 불확실하면 명령을 추측하지 말고 사용자가 실행할 수 있는 정확한 안내만 제시한다.
+4. 현재 프로젝트 루트에서 다음 bootstrap 스크립트를 실행한다:
+   bash ~/.codex/superpowers/codex/scripts/bootstrap-project.sh .
+5. bootstrap 결과 AGENTS.md 안에 sonbbal-superpowers-codex 관리 블록이 생겼는지 확인한다.
+6. fallback native skill discovery 경로인 .agents/skills/sonbbal-superpowers-codex 가 ~/.codex/superpowers/codex/skills 를 가리키는지 확인한다.
+7. .agents/skills/sonbbal-superpowers-codex 아래에 using-superpowers, brainstorming, writing-plans, executing-plans, team-driven-development 스킬이 있는지 검증한다.
+8. 설치 또는 업데이트 후 Codex를 재시작하라고 안내한다.
 
 권한상 직접 실행할 수 없는 단계가 있으면 사용자가 복사할 수 있는 정확한 shell 명령을 제시해줘.
 ```

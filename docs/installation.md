@@ -34,34 +34,35 @@ The Claude Code marketplace source should be `./claude-code`.
 
 ## Codex
 
+Run these commands from the target project root.
+
 Clone or update the repository:
 
 ```bash
-git clone https://github.com/Sonbbal/superpowers.git ~/.codex/superpowers
-cd ~/.codex/superpowers
-git pull
+mkdir -p ~/.codex
+if [ -d ~/.codex/superpowers/.git ]; then
+  git -C ~/.codex/superpowers pull
+else
+  git clone https://github.com/Sonbbal/superpowers.git ~/.codex/superpowers
+fi
 ```
 
-If your Codex environment uses native skill discovery, create the skills symlink:
+Install `sonbbal-superpowers-codex` through your Codex plugin flow when local plugin marketplaces are available. The repository marketplace is `~/.codex/superpowers/.agents/plugins/marketplace.json`, and it points at the `codex/` package.
+
+Bootstrap the target project:
 
 ```bash
-mkdir -p ~/.agents/skills
-ln -s ~/.codex/superpowers/codex/skills ~/.agents/skills/sonbbal-superpowers-codex
+bash ~/.codex/superpowers/codex/scripts/bootstrap-project.sh .
 ```
 
-Windows PowerShell:
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
-cmd /c mklink /J "$env:USERPROFILE\.agents\skills\sonbbal-superpowers-codex" "$env:USERPROFILE\.codex\superpowers\codex\skills"
-```
-
-Restart Codex after install or update.
+The bootstrap script updates `AGENTS.md` with a managed usage block and creates `.agents/skills/sonbbal-superpowers-codex` as a native skill discovery fallback. Restart Codex after install or update.
 
 Verify:
 
 ```bash
-find ~/.agents/skills/sonbbal-superpowers-codex -name SKILL.md | sort
+grep -F "sonbbal-superpowers-codex:start" AGENTS.md
+test -f .agents/skills/sonbbal-superpowers-codex/using-superpowers/SKILL.md
+find .agents/skills/sonbbal-superpowers-codex -name SKILL.md | sort
 ```
 
 Run package tests:

@@ -11,7 +11,7 @@
 | 플랫폼 | 패키지 | 설명 |
 | --- | --- | --- |
 | Claude Code | `claude-code/` | Claude Code skills, agents, commands, hooks |
-| Codex | `codex/` | Codex-native skills and plugin metadata |
+| Codex | `codex/` | Codex-native skills, plugin metadata, AGENTS.md bootstrap |
 | OpenCode | `docs/README.opencode.md` | 기존 OpenCode 설치 문서 |
 
 저장소 루트는 더 이상 Claude Code 런타임 패키지가 아닙니다. 루트는 프로젝트 소개, release notes, marketplace entry, 공통 문서만 담당합니다.
@@ -34,13 +34,20 @@ Claude Code에서 실행:
 
 ### Codex
 
-Codex용 패키지는 `codex/`에 있습니다.
+Codex용 패키지는 `codex/`에 있습니다. plugin metadata를 설치한 뒤 대상 프로젝트 루트에서 bootstrap을 실행하세요.
 
 ```bash
-git clone https://github.com/Sonbbal/superpowers.git ~/.codex/superpowers
-mkdir -p ~/.agents/skills
-ln -s ~/.codex/superpowers/codex/skills ~/.agents/skills/sonbbal-superpowers-codex
+mkdir -p ~/.codex
+if [ -d ~/.codex/superpowers/.git ]; then
+  git -C ~/.codex/superpowers pull
+else
+  git clone https://github.com/Sonbbal/superpowers.git ~/.codex/superpowers
+fi
+
+bash ~/.codex/superpowers/codex/scripts/bootstrap-project.sh .
 ```
+
+Codex plugin marketplace를 지원하는 환경에서는 `~/.codex/superpowers/.agents/plugins/marketplace.json`에서 `sonbbal-superpowers-codex`를 설치하세요. Bootstrap은 `AGENTS.md` 관리 블록과 native skill fallback을 만듭니다.
 
 자세한 내용:
 

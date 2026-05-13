@@ -33,7 +33,7 @@ This package provides the Codex-compatible Superpowers skill set under `codex/sk
 - `writing-plans`
 - `writing-skills`
 
-The plugin metadata is in `.codex-plugin/plugin.json`, and Codex discovers skills from `./skills`.
+Install this package through Codex plugin metadata when available, then run the project bootstrap script so the target project's `AGENTS.md` gets managed usage guidance. The bootstrap script also creates the native skill discovery fallback link at `.agents/skills/sonbbal-superpowers-codex`.
 
 ## How This Differs From Claude Code
 
@@ -50,23 +50,24 @@ Claude Code keeps Claude-native agents, commands, and hooks in `../claude-code/`
 
 See [INSTALL.md](INSTALL.md).
 
-## Symlink Fallback
+## Project Installation
 
-If your Codex setup uses native skill discovery directly:
+Run from the target project root:
 
 ```bash
-mkdir -p ~/.agents/skills
-ln -s ~/.codex/superpowers/codex/skills ~/.agents/skills/sonbbal-superpowers-codex
+mkdir -p ~/.codex
+if [ -d ~/.codex/superpowers/.git ]; then
+  git -C ~/.codex/superpowers pull
+else
+  git clone https://github.com/Sonbbal/superpowers.git ~/.codex/superpowers
+fi
+
+bash ~/.codex/superpowers/codex/scripts/bootstrap-project.sh .
 ```
 
-Windows PowerShell:
+If your Codex build supports local plugin marketplaces, install `sonbbal-superpowers-codex` from `~/.codex/superpowers/.agents/plugins/marketplace.json`. The bootstrap script remains required because it writes the target project `AGENTS.md` guidance.
 
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
-cmd /c mklink /J "$env:USERPROFILE\.agents\skills\sonbbal-superpowers-codex" "$env:USERPROFILE\.codex\superpowers\codex\skills"
-```
-
-Restart Codex after installation so skills are rediscovered.
+Restart Codex after installation so plugin metadata, project instructions, and skills are rediscovered.
 
 ## Compatibility Tests
 
@@ -74,6 +75,12 @@ Run the Codex package test from the repository root:
 
 ```bash
 bash tests/codex/test-plugin-package.sh
+```
+
+Run the project bootstrap test:
+
+```bash
+bash tests/codex/test-project-bootstrap.sh
 ```
 
 Run the Codex compatibility checks:
